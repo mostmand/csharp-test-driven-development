@@ -28,12 +28,17 @@ namespace TestDrivenDevelopment
 
             ValidateEmail(user.Email);
 
+            ValidateId(user);
+            
+            return _userRepository.AddUser(user);
+        }
+
+        private static void ValidateId(User user)
+        {
             if (!string.IsNullOrWhiteSpace(user.Id))
             {
                 throw new ArgumentException("ID is specified.");
             }
-            
-            return _userRepository.AddUser(user);
         }
 
         private static void ValidateEmail(string email)
