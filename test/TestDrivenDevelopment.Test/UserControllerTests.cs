@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using FluentAssertions;
 using NSubstitute;
 using TestDrivenDevelopment.Models;
@@ -65,7 +67,37 @@ namespace TestDrivenDevelopment.Test
                 DateOfBirth = new DateTime(2013, 2, 4)
             };
             _dateTimeProvider.Now.Returns(new DateTime(2021, 2, 21));
-            
+
+            // Act and assert
+            Action action = () => _sut.AddUser(user);
+
+            // Assert
+            Assert.Throws<ArgumentException>(action);
+        }
+
+        public static IEnumerable<object[]> InvalidAddUserArguments = new List<object[]>
+        {
+            new object[] {"Asghar", "Asghari", new DateTime(1980, 1, 1), "asgharEmail"},
+        };
+
+        [Theory]
+        [MemberData(nameof(InvalidAddUserArguments))]
+        public void AddUser_ShouldThrowArgumentException_WhenInputArgumentsAreNotValid(
+            string firstName,
+            string lastName,
+            DateTime dateOfBirth,
+            string email)
+        {
+            // Arrange
+            var user = new User()
+            {
+                Email = email,
+                FirstName = firstName,
+                LastName = lastName,
+                DateOfBirth = dateOfBirth
+            };
+            _dateTimeProvider.Now.Returns(new DateTime(2021, 2, 21));
+
             // Act and assert
             Action action = () => _sut.AddUser(user);
 
