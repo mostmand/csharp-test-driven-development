@@ -26,16 +26,21 @@ namespace TestDrivenDevelopment
                 throw new ArgumentException("Age is under 18.");
             }
 
+            ValidateEmail(user.Email);
+            
+            return _userRepository.AddUser(user);
+        }
+
+        private static void ValidateEmail(string email)
+        {
             try
             {
-                new MailAddress(user.Email);
+                new MailAddress(email);
             }
             catch
             {
                 throw new ArgumentException("Email is not valid.");
             }
-            
-            return _userRepository.AddUser(user);
         }
 
         private int GetAge(DateTime dateOfBirth)
