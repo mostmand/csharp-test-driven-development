@@ -63,8 +63,8 @@ namespace TestDrivenDevelopment.Test
                 DateOfBirth = new DateTime(2013, 2, 4)
             };
             
-            // Act
-            Action action = () => _userRepository.AddUser(user);
+            // Act and assert
+            Action action = () => _sut.AddUser(user);
 
             // Assert
             Assert.Throws<ArgumentException>(action);
