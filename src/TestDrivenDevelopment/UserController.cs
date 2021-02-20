@@ -33,7 +33,7 @@ namespace TestDrivenDevelopment
         {
             ValidateAge(user.DateOfBirth);
             ValidateEmail(user.Email);
-            ValidateId(user);
+            ValidateId(user.Id);
             ValidateFirstName(user.FirstName);
             ValidateLastName(user.LastName);
         }
@@ -64,9 +64,9 @@ namespace TestDrivenDevelopment
             }
         }
 
-        private static void ValidateId(User user)
+        private static void ValidateId(string userId)
         {
-            if (!string.IsNullOrWhiteSpace(user.Id))
+            if (!string.IsNullOrWhiteSpace(userId))
             {
                 throw new ArgumentException("ID is specified.");
             }
