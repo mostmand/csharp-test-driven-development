@@ -29,6 +29,16 @@ namespace TestDrivenDevelopment
             ValidateEmail(user.Email);
 
             ValidateId(user);
+
+            if (string.IsNullOrWhiteSpace(user.FirstName))
+            {
+                throw new ArgumentNullException(nameof(user.FirstName));
+            }
+            
+            if (string.IsNullOrWhiteSpace(user.LastName))
+            {
+                throw new ArgumentNullException(nameof(user.LastName));
+            }
             
             return _userRepository.AddUser(user);
         }
