@@ -41,7 +41,8 @@ namespace TestDrivenDevelopment.Test
                 LastName = "Asghari",
                 DateOfBirth = new DateTime(1980, 1, 1)
             });
-
+            _dateTimeProvider.Now.Returns(new DateTime(2021, 2, 21));
+            
             // Act
             var actual = _sut.AddUser(user);
 

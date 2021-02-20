@@ -30,17 +30,27 @@ namespace TestDrivenDevelopment
 
             ValidateId(user);
 
-            if (string.IsNullOrWhiteSpace(user.FirstName))
-            {
-                throw new ArgumentNullException(nameof(user.FirstName));
-            }
+            ValidateFirstName(user.FirstName);
             
-            if (string.IsNullOrWhiteSpace(user.LastName))
-            {
-                throw new ArgumentNullException(nameof(user.LastName));
-            }
+            ValidateLastName(user.LastName);
             
             return _userRepository.AddUser(user);
+        }
+
+        private static void ValidateLastName(string lastName)
+        {
+            if (string.IsNullOrWhiteSpace(lastName))
+            {
+                throw new ArgumentNullException(nameof(lastName));
+            }
+        }
+
+        private static void ValidateFirstName(string firstName)
+        {
+            if (string.IsNullOrWhiteSpace(firstName))
+            {
+                throw new ArgumentNullException(nameof(firstName));
+            }
         }
 
         private static void ValidateId(User user)
