@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Net.Mail;
 using TestDrivenDevelopment.Models;
 using TestDrivenDevelopment.Repository;
 
@@ -23,6 +24,15 @@ namespace TestDrivenDevelopment
             if (age < 18)
             {
                 throw new ArgumentException("Age is under 18.");
+            }
+
+            try
+            {
+                new MailAddress(user.Email);
+            }
+            catch
+            {
+                throw new ArgumentException("Email is not valid.");
             }
             
             return _userRepository.AddUser(user);
