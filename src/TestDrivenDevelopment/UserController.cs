@@ -27,6 +27,11 @@ namespace TestDrivenDevelopment
             }
 
             ValidateEmail(user.Email);
+
+            if (!string.IsNullOrWhiteSpace(user.Id))
+            {
+                throw new ArgumentException("ID is specified.");
+            }
             
             return _userRepository.AddUser(user);
         }
