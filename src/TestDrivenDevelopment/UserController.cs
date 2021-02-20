@@ -14,7 +14,7 @@ namespace TestDrivenDevelopment
 
         public User AddUser(User user)
         {
-            throw new System.NotImplementedException();
+            return _userRepository.AddUser(user);
         }
 
         public User GetUserById(string userId)
