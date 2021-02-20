@@ -7,10 +7,13 @@ namespace TestDrivenDevelopment
     public class UserController : IUserController
     {
         private readonly IUserRepository _userRepository;
+        private readonly IDateTimeProvider _dateTimeProvider;
 
-        public UserController(IUserRepository userRepository)
+        public UserController(IUserRepository userRepository,
+            IDateTimeProvider dateTimeProvider)
         {
             _userRepository = userRepository;
+            _dateTimeProvider = dateTimeProvider;
         }
 
         public User AddUser(User user)
@@ -25,9 +28,9 @@ namespace TestDrivenDevelopment
             return _userRepository.AddUser(user);
         }
 
-        private static int GetAge(DateTime dateOfBirth)
+        private int GetAge(DateTime dateOfBirth)
         {
-            var now = DateTime.Now;
+            var now = _dateTimeProvider.Now;
             var age = Convert.ToInt32((now - dateOfBirth).TotalDays / 365);
             return age;
         }

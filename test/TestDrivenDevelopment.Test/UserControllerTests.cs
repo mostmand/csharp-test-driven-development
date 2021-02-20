@@ -11,11 +11,13 @@ namespace TestDrivenDevelopment.Test
     {
         private readonly UserController _sut;
         private readonly IUserRepository _userRepository;
+        private readonly IDateTimeProvider _dateTimeProvider;
 
         public UserControllerTests()
         {
             _userRepository = Substitute.For<IUserRepository>();
-            _sut = new UserController(_userRepository);
+            _dateTimeProvider = Substitute.For<IDateTimeProvider>();
+            _sut = new UserController(_userRepository, _dateTimeProvider);
         }
 
         [Fact]
@@ -62,6 +64,7 @@ namespace TestDrivenDevelopment.Test
                 LastName = "Asghari",
                 DateOfBirth = new DateTime(2013, 2, 4)
             };
+            _dateTimeProvider.Now.Returns(new DateTime(2021, 2, 21));
             
             // Act and assert
             Action action = () => _sut.AddUser(user);
