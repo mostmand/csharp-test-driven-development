@@ -77,12 +77,14 @@ namespace TestDrivenDevelopment.Test
 
         public static IEnumerable<object[]> InvalidAddUserArguments = new List<object[]>
         {
-            new object[] {"Asghar", "Asghari", new DateTime(1980, 1, 1), "asgharEmail"},
+            new object[] {default(string), "Asghar", "Asghari", new DateTime(1980, 1, 1), "asgharEmail"},
+            new object[] {"1234", "Asghar", "Asghari", new DateTime(1980, 1, 1), "asghar@gmail.com"},
         };
 
         [Theory]
         [MemberData(nameof(InvalidAddUserArguments))]
         public void AddUser_ShouldThrowArgumentException_WhenInputArgumentsAreNotValid(
+            string id,
             string firstName,
             string lastName,
             DateTime dateOfBirth,
@@ -91,6 +93,7 @@ namespace TestDrivenDevelopment.Test
             // Arrange
             var user = new User()
             {
+                Id = id,
                 Email = email,
                 FirstName = firstName,
                 LastName = lastName,
