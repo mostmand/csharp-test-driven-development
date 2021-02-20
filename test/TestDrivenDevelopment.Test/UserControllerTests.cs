@@ -1,4 +1,5 @@
 ﻿using System;
+using FluentAssertions;
 using NSubstitute;
 using TestDrivenDevelopment.Models;
 using TestDrivenDevelopment.Repository;
@@ -28,12 +29,26 @@ namespace TestDrivenDevelopment.Test
                 LastName = "Asghari",
                 DateOfBirth = new DateTime(1980, 1, 1)
             };
+            _userRepository.AddUser(user).Returns(new User()
+            {
+                Id = "1234",
+                Email = "asghar@gmail.com",
+                FirstName = "Asghar",
+                LastName = "Asghari",
+                DateOfBirth = new DateTime(1980, 1, 1)
+            });
 
             // Act
-            _sut.AddUser(user);
+            var actual = _sut.AddUser(user);
 
             //Assert
             _userRepository.Received(1).AddUser(user);
+
+            actual.Id.Should().Be("1234");
+            actual.Email.Should().Be("asghar@gmail.com");
+            actual.FirstName.Should().Be("Asghar");
+            actual.LastName.Should().Be("Asghari");
+            actual.DateOfBirth.Should().Be(new DateTime(1980, 1, 1));
         }
     }
 }
