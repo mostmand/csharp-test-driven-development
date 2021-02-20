@@ -19,22 +19,33 @@ namespace TestDrivenDevelopment
 
         public User AddUser(User user)
         {
-            var age = GetAge(user.DateOfBirth);
+            ValidateUser(user);
+
+            return _userRepository.AddUser(user);
+        }
+
+        public User GetUserById(string userId)
+        {
+            throw new System.NotImplementedException();
+        }
+        
+        private void ValidateUser(User user)
+        {
+            ValidateAge(user.DateOfBirth);
+            ValidateEmail(user.Email);
+            ValidateId(user);
+            ValidateFirstName(user.FirstName);
+            ValidateLastName(user.LastName);
+        }
+
+        private void ValidateAge(DateTime dateOfBirth)
+        {
+            var age = GetAge(dateOfBirth);
 
             if (age < 18)
             {
                 throw new ArgumentException("Age is under 18.");
             }
-
-            ValidateEmail(user.Email);
-
-            ValidateId(user);
-
-            ValidateFirstName(user.FirstName);
-            
-            ValidateLastName(user.LastName);
-            
-            return _userRepository.AddUser(user);
         }
 
         private static void ValidateLastName(string lastName)
@@ -78,11 +89,6 @@ namespace TestDrivenDevelopment
             var now = _dateTimeProvider.Now;
             var age = Convert.ToInt32((now - dateOfBirth).TotalDays / 365);
             return age;
-        }
-
-        public User GetUserById(string userId)
-        {
-            throw new System.NotImplementedException();
         }
     }
 }
