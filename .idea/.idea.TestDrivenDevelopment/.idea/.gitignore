@@ -1,0 +1,13 @@
+﻿# Default ignored files
+/shelf/
+/workspace.xml
+# Rider ignored files
+/contentModel.xml
+/projectSettingsUpdater.xml
+/.idea.TestDrivenDevelopment.iml
+/modules.xml
+# Datasource local storage ignored files
+/../../../../../../../:\code\star-academy\TestDrivenDevelopment\.idea\.idea.TestDrivenDevelopment\.idea/dataSources/
+/dataSources.local.xml
+# Editor-based HTTP Client requests
+/httpRequests/
