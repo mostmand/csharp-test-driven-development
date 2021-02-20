@@ -74,13 +74,22 @@ namespace TestDrivenDevelopment
 
         private static void ValidateEmail(string email)
         {
+            if (!IsValid(email))
+            {
+                throw new ArgumentException("Email is not valid.");
+            }
+        }
+
+        private static bool IsValid(string email)
+        {
             try
             {
-                new MailAddress(email);
+                _ = new MailAddress(email);
+                return true;
             }
             catch
             {
-                throw new ArgumentException("Email is not valid.");
+                return false;
             }
         }
 
