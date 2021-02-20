@@ -107,5 +107,29 @@ namespace TestDrivenDevelopment.Test
             // Assert
             Assert.Throws<ArgumentException>(action);
         }
+
+        [Theory]
+        [InlineData("Asghar", "         ")]
+        [InlineData("Asghar", null)]
+        [InlineData(null, "Asghari")]
+        [InlineData("   \n", "Asghari")]
+        public void AddUser_ShouldThrowArgumentNullException_WhenFirstNameOrLastNameIsNullOrWhitespace(string firstName, string lastName)
+        {
+            // Arrange
+            var user = new User()
+            {
+                Email = "asghar@gmail.com",
+                FirstName = firstName,
+                LastName = lastName,
+                DateOfBirth = new DateTime(1980, 1, 1)
+            };
+            _dateTimeProvider.Now.Returns(new DateTime(2021, 2, 21));
+
+            // Act and assert
+            Action action = () => _sut.AddUser(user);
+
+            // Assert
+            Assert.Throws<ArgumentNullException>(action);
+        }
     }
 }
