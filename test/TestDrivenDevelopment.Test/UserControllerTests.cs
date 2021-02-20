@@ -50,5 +50,24 @@ namespace TestDrivenDevelopment.Test
             actual.LastName.Should().Be("Asghari");
             actual.DateOfBirth.Should().Be(new DateTime(1980, 1, 1));
         }
+
+        [Fact]
+        public void AddUser_ShouldThrowArgumentException_WhenAgeIsUnder18()
+        {
+            // Arrange
+            var user = new User()
+            {
+                Email = "asghar@gmail.com",
+                FirstName = "Asghar",
+                LastName = "Asghari",
+                DateOfBirth = new DateTime(2013, 2, 4)
+            };
+            
+            // Act
+            Action action = () => _userRepository.AddUser(user);
+
+            // Assert
+            Assert.Throws<ArgumentException>(action);
+        }
     }
 }
