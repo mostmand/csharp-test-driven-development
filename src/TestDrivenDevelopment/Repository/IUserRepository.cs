@@ -4,7 +4,7 @@ namespace TestDrivenDevelopment.Repository
 {
     public interface IUserRepository
     {
-        string AddUser(User user);
+        User AddUser(User user);
         User GetUserById(string userId);
     }
 }
