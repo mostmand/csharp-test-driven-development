@@ -15,8 +15,7 @@ namespace TestDrivenDevelopment
 
         public User AddUser(User user)
         {
-            var now = DateTime.Now;
-            var age = Convert.ToInt32((now - user.DateOfBirth).TotalDays / 365);
+            var age = GetAge(user.DateOfBirth);
 
             if (age < 18)
             {
@@ -24,6 +23,13 @@ namespace TestDrivenDevelopment
             }
             
             return _userRepository.AddUser(user);
+        }
+
+        private static int GetAge(DateTime dateOfBirth)
+        {
+            var now = DateTime.Now;
+            var age = Convert.ToInt32((now - dateOfBirth).TotalDays / 365);
+            return age;
         }
 
         public User GetUserById(string userId)
