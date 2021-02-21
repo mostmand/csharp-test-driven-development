@@ -69,7 +69,7 @@ namespace TestDrivenDevelopment.Test
             };
             _dateTimeProvider.Now.Returns(new DateTime(2021, 2, 21));
 
-            // Act and assert
+            // Act
             Action action = () => _sut.AddUser(user);
 
             // Assert
@@ -102,7 +102,7 @@ namespace TestDrivenDevelopment.Test
             };
             _dateTimeProvider.Now.Returns(new DateTime(2021, 2, 21));
 
-            // Act and assert
+            // Act
             Action action = () => _sut.AddUser(user);
 
             // Assert
@@ -126,7 +126,7 @@ namespace TestDrivenDevelopment.Test
             };
             _dateTimeProvider.Now.Returns(new DateTime(2021, 2, 21));
 
-            // Act and assert
+            // Act
             Action action = () => _sut.AddUser(user);
 
             // Assert
